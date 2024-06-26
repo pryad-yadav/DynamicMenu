@@ -17,14 +17,15 @@ const DynamicMenu = () => {
   useEffect(() => {
     const fetchToken = async () => {
       const data = {
-        user: "AdminPro",
-        password: "Mnop@1234",
+        user: "AdminPrime",
+        password: "vbnm123VBNM!@#",
       };
       try {
         const response = await axios.post(
           "http://appnox-tm.it/api/login",
           data
         );
+        console.log(response)
         return response.data.result.key;
       } catch (error) {
         console.error("Error fetching access token:", error);
@@ -62,19 +63,17 @@ const DynamicMenu = () => {
   const MenuItems = (items) => {
     return items.map((item) => {
       if (item.children && item.children.length > 0) {
-        item.children.key = item.menuId;
-        item.children.label = item.item;
+        
         return (
-          <SubMenu key={item.menuId} title={item.item} icon={item.type}>
+          <SubMenu key={item.menuId} title={item.item} >
             {MenuItems(item.children)}
           </SubMenu>
         );
       }
-      item.key = item.menuId;
-      item.label = item.item;
+    
       return (
-        <Menu.Item key={item.menuId} icon={item.type}>
-          {item.item}{" "}
+        <Menu.Item key={item.menuId} >
+          {item.item}
         </Menu.Item>
       );
     });
